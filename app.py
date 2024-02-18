@@ -7,9 +7,14 @@ from backtesting import Backtest, Strategy
 from backtesting.test import GOOG
 import math
 
+
+
 class DCA(Strategy):
-    
-    # amount_to_invest = 10
+    total_invested = 0
+    current_shares = 0
+    amount_to_invest = 0
+    target_return = 0
+
     def init(self):
         #print(self.data.Close.s.index.dayofweek)
         self.day_of_week = self.I(
@@ -17,14 +22,16 @@ class DCA(Strategy):
             self.data.Close.s.index.dayofweek, 
             plot = False,
         )
+         
     def next(self):
        if self.day_of_week[-1] == 1: #tuesday - buy signal on closing price
-            self.buy(size = math.floor(self.amount_to_invest / self.data.Close[-1]))
+            self.buy(size = math.floor(amount_to_invest / self.data.Close[-1]))
             # if len(self.data.Close > 30): # if the price had gone down by more than 6 percent in the past month, buy by the same amount
             #     if self.data.Close[-1]/self.data.Close[-3]<0.95:
             #         self.buy(size = math.floor(self.amount_to_invest / self.data.Close[-1]))
        #print(len(self.data.Close[-1]))
-
+    def set_amount_to_invest(value):
+        total_invested = value
 
 
 print(GOOG)
@@ -70,7 +77,9 @@ def func():
     if request.method == "POST":
         goal = request.form.get("goal")
         fname = request.form.get("fname")
-        amount_to_invest = request.form.get("weeklyinvestment")
+        DCA.amount_to_invest = request.form.get("weeklyinvestment")
+        DCA.set_amount_to_invest(request.form.get("weeklyinvestment"))
+        DCA.target_return = goal
         stats = bt.run()
         print(stats)
         trades = stats["_trades"]
