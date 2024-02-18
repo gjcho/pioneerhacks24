@@ -30,9 +30,13 @@ def create_app(test_config=None):
 def home():
     return render_template('index.html')
 
-@app.route('/sign-in', methods = ['GET', 'POST'])
+@app.route('/get-started', methods = ['GET', 'POST'])
 def func():
     return render_template("index2.html")
+
+@app.route('/invest', methods = ['GET', 'POST'])
+def func1():
+    return render_template("index3.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
