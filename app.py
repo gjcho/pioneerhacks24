@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask,  render_template
+from flask import Flask,  render_template, request
 
 app = Flask(__name__)
 
@@ -32,11 +32,15 @@ def home():
 
 @app.route('/get-started', methods = ['GET', 'POST'])
 def func():
+    if request.method == "POST":
+       name = request.form.get("name")
+       print("Your name is ", name)
+       return render_template("index3.html")
     return render_template("index2.html")
 
-@app.route('/invest', methods = ['GET', 'POST'])
-def func1():
-    return render_template("index3.html")
+# @app.route('/invest', methods = ['GET', 'POST'])
+# def func1():
+#     return render_template("index3.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
