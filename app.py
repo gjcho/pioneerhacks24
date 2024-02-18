@@ -9,7 +9,7 @@ import math
 
 class DCA(Strategy):
     
-    amount_to_invest = 10
+    # amount_to_invest = 10
     def init(self):
         #print(self.data.Close.s.index.dayofweek)
         self.day_of_week = self.I(
@@ -20,9 +20,9 @@ class DCA(Strategy):
     def next(self):
        if self.day_of_week[-1] == 1: #tuesday - buy signal on closing price
             self.buy(size = math.floor(self.amount_to_invest / self.data.Close[-1]))
-            if len(self.data.Close > 30): # if the price had gone down by more than 6 percent in the past month, buy by the same amount
-                if self.data.Close[-1]/self.data.Close[-3]<0.95:
-                    self.buy(size = math.floor(self.amount_to_invest / self.data.Close[-1]))
+            # if len(self.data.Close > 30): # if the price had gone down by more than 6 percent in the past month, buy by the same amount
+            #     if self.data.Close[-1]/self.data.Close[-3]<0.95:
+            #         self.buy(size = math.floor(self.amount_to_invest / self.data.Close[-1]))
        #print(len(self.data.Close[-1]))
 
 
@@ -36,16 +36,6 @@ bt = Backtest(
     DCA, 
     trade_on_close = True,
 )
-
-stats = bt.run()
-# bt.plot()
-print(stats)
-trades = stats["_trades"]
-price_paid = trades["Size"]  * trades["EntryPrice"]
-total_invested = price_paid.sum()
-
-current_shares = trades["Size"].sum() #microshares
-current_equity = current_shares * GOOG.Close.iloc[-1]
 
 app = Flask(__name__)
 
@@ -80,8 +70,17 @@ def func():
     if request.method == "POST":
         goal = request.form.get("goal")
         fname = request.form.get("fname")
+        amount_to_invest = request.form.get("weeklyinvestment")
+        stats = bt.run()
+        print(stats)
+        trades = stats["_trades"]
+        price_paid = trades["Size"]  * trades["EntryPrice"]
+        total_invested = price_paid.sum()
+
+        current_shares = trades["Size"].sum() #microshares
+        current_equity = current_shares * GOOG.Close.iloc[-1] 
         bt.plot()
-        return render_template("index3.html", g=goal, n=fname, stats=stats)
+        return render_template("index3.html", g=goal, n=fname, stats=stats, wi=wi)
     return render_template("index2.html")
 
 @app.route('/summary', methods = ['GET', 'POST'])
