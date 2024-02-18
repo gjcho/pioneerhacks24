@@ -8,6 +8,7 @@ from backtesting.test import GOOG
 import math
 
 class DCA(Strategy):
+    
     amount_to_invest = 10
     def init(self):
         #print(self.data.Close.s.index.dayofweek)
