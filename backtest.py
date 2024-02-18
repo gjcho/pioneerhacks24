@@ -34,7 +34,7 @@ bt = Backtest(
 )
 
 stats = bt.run()
-# bt.plot()
+bt.plot()
 print(stats)
 trades = stats["_trades"]
 price_paid = trades["Size"]  * trades["EntryPrice"]

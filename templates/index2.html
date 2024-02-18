@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<body style="background-color:rgb(183, 254, 190);">
-   <!-- <h1>Sign-In</h1> -->
+<body style="background-color:rgb(152,208,80)">
+    <img src="static/login.jpg" alt="hi" width = 1450>
 </body>
 <head>
    <meta charset="UTF-8">
@@ -10,14 +10,55 @@
 <body>
    <h1>Get Started</h1>
    <style>
+        .input1 {
+            position: absolute;
+            top: 270px; 
+            left: 310px;
+        }
+
+        .input2 {
+            position: absolute;
+            top: 420px; 
+            left: 310px;
+        }
+
+        .input3 {
+            position: absolute;
+            top: 570px; 
+            left: 310px;
+        }
+
+        .input4 {
+            position: absolute;
+            top: 270px; 
+            left: 770px;
+        }
+
+        .input5 {
+            position: absolute;
+            top: 420px; 
+            left: 770px;
+        }
+
+        .input6 {
+            position: absolute;
+            top: 570px; 
+            left: 770px;
+            padding: 11px 30px;
+            font-size: 18px;
+            color: rgb(45, 176, 33);
+            background-color: #d5ff95;
+        }
+
    </style>
 </body>
     <form method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="goal">Goal:</label>
-        <input type="number" id="goal" name="goal"><br><br>
-        <button type="submit">Submit</button>
+        <input type="text" class="input1" id="fname" name="fname"><br><br>
+        <input type="text" class="input2" id="lname" name="lname"><br><br>
+        <input type="text" class="input3" id="email" name="email"><br><br>
+        <input type="text" class="input4" id="password" name="password"><br><br>
+        <input type="number" class = "input5" id="goal" name="goal"><br><br>
+        <button class = "input6" type="submit">Submit</button>
     </form>
     <!-- <a href="/invest">
         <button type="submit">Submit</button>
