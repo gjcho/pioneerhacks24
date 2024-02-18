@@ -9,7 +9,16 @@
    <a href="/summary">
       <button>View Summary</button>
   </a>
-   <p style="font-size: 24px;">Stats: ${{ stats }}.</p>
+   <!-- <p style="font-size: 24px;">Stats: ${{ stats }}.</p> -->
+   <p style="font-size: 24px;">Stats:</p>
+   <table>
+      {% for key, value in stats.items() %}
+      <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+      </tr>
+      {% endfor %}
+  </table>
    <style>
    </style>
 </body>
